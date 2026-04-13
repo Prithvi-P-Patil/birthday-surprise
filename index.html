@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Birthday Surprise 🎂</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #ff758c, #ff7eb3);
+  overflow: hidden;
+  text-align: center;
+}
+
+/* Container */
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Card */
+.card {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  width: 320px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* TEXT FIX */
+h1 {
+  font-size: 22px;
+  color: #222;   /* DARK TEXT */
+}
+
+p {
+  color: #444;
+}
+
+/* Buttons */
+button {
+  margin: 10px;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.yes { background: #00c853; color: white; }
+.no { background: #ff1744; color: white; position: relative; }
+
+/* Image */
+img {
+  width: 100%;
+  border-radius: 15px;
+  margin-bottom: 15px;
+}
+
+/* Confetti */
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  top: -10px;
+  animation: fall 3s linear infinite;
+}
+
+@keyframes fall {
+  to { transform: translateY(100vh); }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="card" id="card">
+
+    <!-- ADD YOUR PHOTO HERE -->
+    <img id="photo" src="https://via.placeholder.com/300" />
+
+    <h1 id="question">Are you ready for your birthday surprise? 🎁</h1>
+
+    <button class="yes" onclick="next(true)">Yes 😍</button>
+    <button class="no" id="noBtn" onmouseover="moveNo()">No 🙄</button>
+
+  </div>
+</div>
+
+<script>
+let step = 0;
+
+/* QUESTIONS */
+function next(ans){
+  const q = document.getElementById("question");
+
+  if(step === 0){
+    q.innerText = "Do you agree I am the BEST boyfriend ever? 😏";
+    step++;
+  }
+
+  else if(step === 1){
+    q.innerText = "Should I get unlimited hugs today? 🤗";
+    step++;
+  }
+
+  else if(step === 2){
+    q.innerText = "Last chance… do you love me? ❤️";
+    step++;
+  }
+
+  else {
+    showFinal();
+  }
+}
+
+/* FINAL SCREEN */
+function showFinal(){
+  document.getElementById("card").innerHTML = `
+    <h1>🎂 HAPPY BIRTHDAY BABY ❤️</h1>
+    <p>You are stuck with me forever 😌</p>
+    <p>I love you more than food... and that's serious 😤</p>
+  `;
+  confetti();
+}
+
+/* RUNAWAY NO BUTTON 😈 */
+function moveNo(){
+  const btn = document.getElementById("noBtn");
+  const x = Math.random() * 200 - 100;
+  const y = Math.random() * 200 - 100;
+  btn.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+/* CONFETTI */
+function confetti(){
+  for(let i=0;i<100;i++){
+    let c = document.createElement("div");
+    c.className = "confetti";
+    c.style.left = Math.random()*100 + "vw";
+    c.style.background = `hsl(${Math.random()*360},100%,50%)`;
+    document.body.appendChild(c);
+  }
+}
+</script>
+
+</body>
+</html>
