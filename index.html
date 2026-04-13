@@ -33,7 +33,7 @@ body {
 /* TEXT FIX */
 h1 {
   font-size: 22px;
-  color: #222;   /* DARK TEXT */
+  lor: #222;   /* DARK TEXT */
 }
 
 p {
@@ -64,15 +64,25 @@ img {
 /* Confetti */
 .confetti {
   position: fixed;
-  width: 10px;
-  height: 10px;
-  top: -10px;
-  animation: fall 3s linear infinite;
+  width: 8px;
+  height: 14px;
+  top: -20px;
+  opacity: 0.9;
+  animation: fall linear forwards;
 }
 
 @keyframes fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(110vh) rotate(720deg);
+  }
+}
+@keyframes fall {
   to { transform: translateY(100vh); }
 }
+  
 </style>
 </head>
 
@@ -152,13 +162,34 @@ function moveNo(){
 }
 
 /* CONFETTI */
-function confetti(){
-  for(let i=0;i<100;i++){
+function confetti() {
+  for (let i = 0; i < 150; i++) {
     let c = document.createElement("div");
     c.className = "confetti";
-    c.style.left = Math.random()*100 + "vw";
-    c.style.background = `hsl(${Math.random()*360},100%,50%)`;
+
+    // Random position
+    c.style.left = Math.random() * 100 + "vw";
+
+    // Random color
+    c.style.background = `hsl(${Math.random() * 360}, 100%, 50%)`;
+
+    // Random size
+    c.style.width = (Math.random() * 8 + 4) + "px";
+    c.style.height = (Math.random() * 12 + 6) + "px";
+
+    // Random fall duration
+    c.style.animationDuration = (Math.random() * 3 + 2) + "s";
+
+    // Random delay
+    c.style.animationDelay = Math.random() * 2 + "s";
+
+    // Slight horizontal movement
+    c.style.transform = `translateX(${Math.random() * 50 - 25}px)`;
+
     document.body.appendChild(c);
+
+    // Remove after animation
+    setTimeout(() => c.remove(), 5000);
   }
 }
 </script>
